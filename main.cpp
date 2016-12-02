@@ -12,7 +12,6 @@ using namespace std;
 
 int main()
 {
-	
 	int tipo_usuario;
 	int pos;
 	string text;
