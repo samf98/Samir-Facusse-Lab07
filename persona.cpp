@@ -59,4 +59,3 @@ string persona::toString()
 	ss << this->usuario<<endl<<this->correo<<endl<<this->password<<endl<<this->tipo<<endl;
 	return ss.str();
 }
-
