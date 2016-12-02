@@ -132,7 +132,7 @@ int main()
 											cout<<"Ingrese la posición a eliminar: ";
 											cin>>pos;
 											if(pos>0&&pos<usuarios.size()){
-												usuarios.erase(pos);
+												usuarios.erase(usuarios.begin()+pos);
 											}
 											else
 												cout<<"Posición inválida."<<endl;
@@ -208,8 +208,8 @@ int main()
 										{
 											cout<<"Ingrese la posición a eliminar: ";
 											cin>>pos;
-											if(pos>0&&pos<usuarios.size()){
-												usuarios.erase(pos);
+											if((pos>0&&pos<usuarios.size())&&(usuarios.at(i)->getTipo()!=0&&usuarios.at(i)->getTipo()!=1)){
+												usuarios.erase(usuarios.begin()+pos);
 											}
 											else
 												cout<<"Posición inválida."<<endl;
