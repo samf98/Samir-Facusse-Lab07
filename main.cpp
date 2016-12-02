@@ -5,6 +5,7 @@
 #include "intern.h"
 #include "supervisor.h"
 #include <vector>
+#include <fstream>
 
 
 using namespace std;
@@ -36,7 +37,7 @@ int main()
 	usuarios.push_back(user);
 	do
 	{
-		cout<<"1-Login"<<endl;
+		cout<<"1-Login"<<endl<<"2-Guardar en archivo"<<endl;
 		cin>>op;
 
 		switch(op)
@@ -294,7 +295,22 @@ int main()
 					{
 						cout<<"Usuario/Contraseña incorrecta"<<endl;
 					}
+				i = usuarios.size();
 				}
+				break;
+			}
+
+			case 2:
+			{
+				ofstream myfile;
+				text = "";
+				for (int i = 0; i < usuarios.size(); ++i)
+				{
+					text+=usuarios.at(i)->toString();
+				}
+				myfile.open("data.txt");
+				myfile << text;
+				myfile.close();
 				break;
 			}
 		}

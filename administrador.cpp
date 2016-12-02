@@ -34,6 +34,6 @@ int administrador::getTipo()
 string administrador::toString()
 {
 	stringstream ss;
-	ss << "Administrador:"<<endl<<persona::toString()<<endl<<this->fecha<<endl;
+	ss << persona::toString()<<this->fecha<<endl;
 	return ss.str();
 }

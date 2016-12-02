@@ -56,7 +56,7 @@ int persona::getTipo()
 string persona::toString()
 {
 	stringstream ss;
-	ss << this->usuario<<endl<<this->correo<<this->password<<endl<<this->tipo<<endl;
+	ss << this->usuario<<endl<<this->correo<<endl<<this->password<<endl<<this->tipo<<endl;
 	return ss.str();
 }
 
