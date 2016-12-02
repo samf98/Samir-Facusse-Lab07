@@ -13,6 +13,7 @@ int main()
 {
 	int tipo_usuario;
 	int pos;
+	string text;
 
 	string usuario;
 	string contrasena;
@@ -223,13 +224,68 @@ int main()
 							
 							case 3:
 							{
-
+								cout<<"1-Ingresar nuevo usuario"<<endl<<"2-Borrar usuario existente"<<endl;
+								cin>>op;
+								cin>>pos;
+								if(op==1)
+									{
+										cout<<"Ingrese datos de nuevo usuario."<<endl;
+										cout<<"Usuario: ";
+										cin>>usuario;
+										cout<<"Contraseña(tiene que tener 8 caracteres): ";
+										cin>>contrasena;
+										cout<<"Correo: ";
+										cin>>correo;
+										tipo_usuario = 3;
+										if(contrasena.size()==8){
+											switch(tipo_usuario)
+											{
+											
+												case 3:
+												{
+													cout<<"Ingrese el número de días que lleva trabajando: ";
+													cin>>dias;
+													if(dias>=0)
+													{
+														user = new intern(usuario,correo,contrasena,3,dias);
+														usuarios.push_back(user);
+													}
+													else
+														cout<<"Cantidad de días inválida."<<endl;
+													break;
+												}
+											}
+										}
+										else
+										{
+											cout<<"Contraseña inválida."<<endl;
+										}
+									}
+									else if(op == 2)
+										{
+											cout<<"Ingrese la posición a eliminar: ";
+											cin>>pos;
+											if((pos>0&&pos<usuarios.size())&&(usuarios.at(i)->getTipo()==3)){
+												usuarios.erase(usuarios.begin()+pos);
+											}
+											else
+												cout<<"Posición inválida."<<endl;
+										}
+										else if((op == 0) || (op != 1 && op == 2))
+										{
+											cout<<"Posición no es válida."<<endl;
+										}
 								break;
 							}
 							
 							case 4:
 							{
-
+								cout<<"Presentando lista de usuarios..."<<endl;
+								for (int i = 0; i < usuarios.size(); ++i)
+								{
+									text+=usuarios.at(i)->toString();
+								}
+								cout<<text;
 								break;
 							}
 						}	
