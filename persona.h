@@ -24,7 +24,7 @@ class persona
 		string getCorreo();
 		void setContrasena(string);
 		string getContrasena();
-		virtual void setTipo(int)=0;
-		virtual int getTipo()=0;
+		virtual void setTipo(int);
+		virtual int getTipo();
 		virtual string toString();
 };

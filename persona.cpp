@@ -43,9 +43,20 @@ string persona::getContrasena()
 	return password;
 }
 
+void persona::setTipo(int pTipo)
+{
+	tipo = pTipo;
+}
+
+int persona::getTipo()
+{
+	return tipo;
+}
+
 string persona::toString()
 {
 	stringstream ss;
 	ss << this->usuario<<endl<<this->correo<<this->password<<endl<<this->tipo<<endl;
+	return ss.str();
 }
 
