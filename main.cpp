@@ -387,6 +387,7 @@ int main()
 			case 2:
 			{
 				ofstream myfile;
+				myfile.open("data.txt");
 				text = "";
 				for (int i = 0; i < usuarios.size(); ++i)
 				{
@@ -411,7 +412,6 @@ int main()
 						text+=interns->toString();
 					}
 				}
-				myfile.open("data.txt");
 				myfile << text;
 				myfile.close();
 				break;
