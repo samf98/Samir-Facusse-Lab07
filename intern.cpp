@@ -34,6 +34,6 @@ int intern::getTipo()
 string intern::toString()
 {
 	stringstream ss;
-	ss << persona::toString()<<endl<<this->dias<<endl;
+	ss << persona::toString()<<this->dias<<endl;
 	return ss.str();
 }

@@ -35,6 +35,6 @@ int supervisor::getTipo()
 string supervisor::toString()
 {
 	stringstream ss;
-	ss << persona::toString()<<endl<<this->entradas<<endl;
+	ss << persona::toString()<<this->entradas<<endl;
 	return ss.str();
 }

@@ -6,7 +6,7 @@
 #include "supervisor.h"
 #include <vector>
 #include <fstream>
-
+#include <string>
 
 using namespace std;
 
@@ -25,13 +25,92 @@ int main()
 	double sueldo;
 
 	int op = 0;
-	vector<persona*> usuarios;
-	usuario = "admin";
-	contrasena = "1234567890123456";
-	correo = "asdf";
-	fecha = "hi";
-
 	persona* user;
+	vector<persona*> usuarios;
+
+	ifstream infile;
+	infile.open("data.txt");
+	int cont=1;
+	while(!infile.eof())
+	{
+		getline(infile,text);
+		switch(cont)
+		{
+			case 1:
+			{
+				usuario = text;
+				break;
+			}
+			case 2:
+			{
+				correo = text;
+				break;
+			}
+			case 3:
+			{
+				contrasena = text;
+				break;
+			}
+			case 4:
+			{
+				if(text=="1")
+				{
+					tipo_usuario = 1;
+				}
+				else if(text == "2")
+				{
+					tipo_usuario = 2;
+				}
+				else if(text == "3")
+				{
+					tipo_usuario = 3;
+				}
+				else if(text == "4")
+				{
+					tipo_usuario = 4;
+				}
+				break;
+			}
+			case 5:
+			{
+				if(tipo_usuario == 1)
+				{
+					fecha = text;
+					user = new administrador(usuario,correo,contrasena,1,fecha);
+					usuarios.push_back(user);
+
+				}
+				else if(tipo_usuario == 2)
+				{
+					istringstream ss(text);
+					ss >> sueldo;
+					user = new manager(usuario,correo,contrasena,2,sueldo);
+					usuarios.push_back(user);
+
+				}
+				else if(tipo_usuario == 3)
+				{
+					istringstream ss(text);
+					ss >> dias;
+					user = new intern(usuario,correo,contrasena,3,dias);
+				}
+				else if(tipo_usuario == 4)
+				{
+					istringstream ss(text);
+					ss >> veces;
+					user = new supervisor(usuario,correo,contrasena,4,veces);
+				}
+
+				break;
+			}
+		}
+		if(cont < 5)
+			cont++;
+		else
+			cont = 1;
+	}
+	infile.close();
+
 	user = new administrador(usuario,correo,contrasena,1,fecha);
 
 	usuarios.push_back(user);
@@ -60,7 +139,6 @@ int main()
 							{
 								cout<<"1-Ingresar nuevo usuario"<<endl<<"2-Borrar usuario existente"<<endl;
 								cin>>op;
-								cin>>pos;
 								if(op==1)
 									{
 										cout<<"Ingrese datos de nuevo usuario."<<endl;
@@ -285,8 +363,14 @@ int main()
 								for (int i = 0; i < usuarios.size(); ++i)
 								{
 									text+=usuarios.at(i)->toString();
+									text+="\n";
 								}
 								cout<<text;
+								supervisor* supervisores = dynamic_cast<supervisor*>(usuarios.at(i));
+								if(supervisores!=NULL)
+								{
+									supervisores->setEntradas(supervisores->getEntradas()+1);
+								}
 								break;
 							}
 						}	
@@ -306,7 +390,26 @@ int main()
 				text = "";
 				for (int i = 0; i < usuarios.size(); ++i)
 				{
-					text+=usuarios.at(i)->toString();
+					supervisor* supervisores = dynamic_cast<supervisor*>(usuarios.at(i));
+					administrador* administradores = dynamic_cast<administrador*>(usuarios.at(i));
+					manager* managers = dynamic_cast<manager*>(usuarios.at(i));
+					intern* interns = dynamic_cast<intern*>(usuarios.at(i));
+					
+					if(supervisores!=NULL){
+						text+=supervisores->toString();
+					}
+					else if(administradores!=NULL)
+					{
+						text+=administradores->toString();
+					}
+					else if(managers != NULL)
+					{
+						text+=managers->toString();
+					}
+					else if(interns != NULL)
+					{
+						text+=interns->toString();
+					}
 				}
 				myfile.open("data.txt");
 				myfile << text;

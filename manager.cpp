@@ -34,6 +34,6 @@ int manager::getTipo()
 string manager::toString()
 {
 	stringstream ss;
-	ss << persona::toString()<<endl<<this->sueldo<<endl;
+	ss << persona::toString()<<this->sueldo<<endl;
 	return ss.str();
 }
